@@ -1,0 +1,18 @@
+/* Animasi masuk - slide dari bawah ke atas */
+body.page-enter {
+  opacity: 0;
+  transform: translateY(40px);
+}
+
+body.page-enter-active {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+/* Animasi keluar - slide ke atas */
+body.page-exit {
+  opacity: 0;
+  transform: translateY(-30px);
+  transition: opacity 0.35s ease, transform 0.35s ease;
+}
