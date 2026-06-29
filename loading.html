@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Loading - SOPARXXZ</title>
+  <link rel="stylesheet" href="transition.css"/>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      width: 100vw;
+      height: 100vh;
+      overflow: hidden;
+      background: #000;
+    }
+
+    video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    /* Progress bar di bawah */
+    .progress-wrap {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: rgba(255,255,255,0.1);
+      z-index: 10;
+    }
+
+    .progress-bar {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, #7c3aed, #a855f7);
+      animation: progress 10s linear forwards;
+    }
+
+    @keyframes progress {
+      to { width: 100%; }
+    }
+
+    /* Skip button */
+    .skip {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      z-index: 20;
+      padding: 8px 18px;
+      background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(255,255,255,0.2);
+      border-radius: 20px;
+      color: rgba(255,255,255,0.6);
+      font-size: 12px;
+      font-family: sans-serif;
+      cursor: pointer;
+      backdrop-filter: blur(10px);
+      letter-spacing: 1px;
+    }
+
+    .skip:active { opacity: 0.7; }
+  </style>
+</head>
+<body>
+
+  <video id="introVideo" autoplay playsinline>
+    <source src="assets/gojo.mp4" type="video/mp4">
+  </video>
+
+  <div class="progress-wrap">
+    <div class="progress-bar"></div>
+  </div>
+
+  <div class="skip" onclick="skipNow()">SKIP ⏭</div>
+
+  <script src="transition.js"></script>
+  <script>
+    const video = document.getElementById('introVideo');
+
+    // Otomatis pindah setelah video selesai
+    video.addEventListener('ended', () => {
+      goTo('login.html');
+    });
+
+    // Fallback kalau video lebih dari 10 detik
+    setTimeout(() => {
+      goTo('login.html');
+    }, 10500);
+
+    function skipNow() {
+      goTo('login.html');
+    }
+  </script>
+
+</body>
+</html>
