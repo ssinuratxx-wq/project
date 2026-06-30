@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Pairing - SOPARXXZ</title>
+  <link rel="stylesheet" href="transition.css"/>
+  <link rel="stylesheet" href="owner.css"/>
+  <style>
+    .pairing-box {
+      max-width: 400px;
+      margin: 0 auto;
+    }
+
+    .pairing-card {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 20px;
+      padding: 28px 22px;
+      text-align: center;
+    }
+
+    .pairing-icon {
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      background: rgba(168,85,247,0.15);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 16px;
+    }
+
+    .pairing-icon svg {
+      width: 30px; height: 30px;
+      stroke: #a855f7; fill: none;
+      stroke-width: 2; stroke-linecap: round; stroke-linejoin: round;
+    }
+
+    .pairing-title {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 15px;
+      font-weight: 900;
+      color: #fff;
+      letter-spacing: 1px;
+      margin-bottom: 6px;
+    }
+
+    .pairing-sub {
+      font-size: 12px;
+      color: rgba(255,255,255,0.35);
+      margin-bottom: 22px;
+    }
+
+    .pairing-input {
+      width: 100%;
+      padding: 14px 16px;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 12px;
+      color: #fff;
+      font-size: 15px;
+      font-family: 'Rajdhani', sans-serif;
+      outline: none;
+      text-align: center;
+      letter-spacing: 1px;
+      transition: border 0.2s, transform 0.2s, box-shadow 0.2s;
+      margin-bottom: 14px;
+    }
+
+    .pairing-input:focus {
+      border-color: #a855f7;
+      transform: scale(1.03);
+      box-shadow: 0 4px 18px rgba(168,85,247,0.2);
+    }
+
+    .pairing-input::placeholder { color: rgba(255,255,255,0.25); }
+
+    .btn-pair {
+      width: 100%;
+      padding: 15px;
+      background: linear-gradient(135deg, #7c3aed, #a855f7);
+      border: none;
+      border-radius: 12px;
+      color: #fff;
+      font-size: 14px;
+      font-weight: 700;
+      font-family: 'Rajdhani', sans-serif;
+      letter-spacing: 1px;
+      cursor: pointer;
+      transition: transform 0.15s, opacity 0.15s;
+    }
+
+    .btn-pair:active { transform: scale(0.96); opacity: 0.9; }
+    .btn-pair:disabled { opacity: 0.5; pointer-events: none; }
+
+    /* RESULT CODE */
+    .code-result {
+      display: none;
+      margin-top: 20px;
+      padding: 20px;
+      background: rgba(168,85,247,0.08);
+      border: 1px solid rgba(168,85,247,0.25);
+      border-radius: 14px;
+    }
+
+    .code-result.show { display: block; animation: fadeIn 0.4s ease; }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .code-label {
+      font-size: 11px;
+      color: rgba(255,255,255,0.4);
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+
+    .code-value {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 28px;
+      font-weight: 900;
+      color: #a855f7;
+      letter-spacing: 4px;
+      text-shadow: 0 0 20px rgba(168,85,247,0.5);
+    }
+
+    .code-hint {
+      font-size: 11px;
+      color: rgba(255,255,255,0.3);
+      margin-top: 12px;
+      line-height: 1.5;
+    }
+
+    .error-box {
+      display: none;
+      margin-top: 14px;
+      padding: 12px 16px;
+      background: rgba(239,68,68,0.1);
+      border: 1px solid rgba(239,68,68,0.3);
+      border-radius: 10px;
+      color: #f87171;
+      font-size: 12px;
+    }
+
+    .error-box.show { display: block; }
+
+    .spinner {
+      display: none;
+      width: 18px;
+      height: 18px;
+      border: 2px solid rgba(255,255,255,0.3);
+      border-top-color: #fff;
+      border-radius: 50%;
+      animation: spin 0.7s linear infinite;
+      margin: 0 auto;
+    }
+
+    @keyframes spin { to { transform: rotate(360deg); } }
+  </style>
+</head>
+<body>
+
+  <div class="sidebar">
+    <div class="sidebar-logo">
+      <img src="https://i.ibb.co.com/x8rZhtZd/IMG-20260629-WA0036.jpg" alt="Logo"/>
+      <div class="sidebar-logo-text">
+        <h2>SOPARXXZ</h2>
+        <span>Powered by Sopar</span>
+      </div>
+    </div>
+
+    <div class="nav-section">
+      <p class="nav-label">Menu</p>
+      <a href="#" class="nav-item" onclick="goTo('owner.html'); return false;">
+        <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+        Dashboard
+      </a>
+      <a href="#" class="nav-item" onclick="goTo('member.html'); return false;">
+        <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
+        Member
+      </a>
+      <a href="#" class="nav-item active">
+        <svg viewBox="0 0 24 24"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+        Pairing
+      </a>
+      <a href="#" class="nav-item">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg>
+        Setting
+      </a>
+      <a href="#" class="nav-item danger" onclick="logout()">
+        <svg viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+        Logout
+      </a>
+    </div>
+
+    <div class="sidebar-bottom">
+      <div class="user-card">
+        <img src="https://i.ibb.co.com/x8rZhtZd/IMG-20260629-WA0036.jpg" alt="User"/>
+        <div class="user-card-text">
+          <h4 id="displayName">OWNER</h4>
+          <span id="displayRole">Owner</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="main">
+    <div class="pairing-box">
+      <h1 class="page-title">PAIRING</h1>
+      <p class="page-sub">Hubungkan nomor WhatsApp ke bot</p>
+
+      <div class="pairing-card">
+        <div class="pairing-icon">
+          <svg viewBox="0 0 24 24"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+        </div>
+        <h3 class="pairing-title">Masukkan Nomor HP</h3>
+        <p class="pairing-sub">Format: 62812xxxxxxx (tanpa +)</p>
+
+        <input type="tel" class="pairing-input" id="phoneInput" placeholder="62812xxxxxxx" />
+
+        <button class="btn-pair" id="btnPair" onclick="requestPairing()">
+          <span id="btnText">GENERATE PAIRING CODE</span>
+          <div class="spinner" id="spinner"></div>
+        </button>
+
+        <div class="error-box" id="errorBox"></div>
+
+        <div class="code-result" id="codeResult">
+          <div class="code-label">Kode Pairing Kamu</div>
+          <div class="code-value" id="codeValue">----</div>
+          <div class="code-hint">
+            Buka WhatsApp → Perangkat Tertaut → Tautkan Perangkat →<br>
+            Tautkan dengan nomor telepon → masukkan kode di atas
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <audio id="bgMusic" src="assets/musik.mp3" loop></audio>
+
+  <script src="transition.js"></script>
+  <script>
+    const API = 'https://partly-easter-flashing.ngrok-free.dev';
+
+    const savedUser = sessionStorage.getItem('loggedUser');
+    if (!savedUser) {
+      window.location.href = 'login.html';
+    } else {
+      const user = JSON.parse(savedUser);
+      document.getElementById('displayName').textContent = user.username.toUpperCase();
+      document.getElementById('displayRole').textContent = user.role === 'owner' ? '👑 Owner' : '👤 Member';
+    }
+
+    async function requestPairing() {
+      const nomor = document.getElementById('phoneInput').value.trim();
+      const btn = document.getElementById('btnPair');
+      const btnText = document.getElementById('btnText');
+      const spinner = document.getElementById('spinner');
+      const errorBox = document.getElementById('errorBox');
+      const codeResult = document.getElementById('codeResult');
+
+      errorBox.classList.remove('show');
+      codeResult.classList.remove('show');
+
+      if (!nomor || nomor.length < 9) {
+        errorBox.textContent = 'Masukkan nomor HP yang valid!';
+        errorBox.classList.add('show');
+        return;
+      }
+
+      btn.disabled = true;
+      btnText.style.display = 'none';
+      spinner.style.display = 'block';
+
+      try {
+        const res = await fetch(`${API}/jadibot?ngrok-skip-browser-warning=true`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ nomor })
+        });
+        const data = await res.json();
+
+        if (data.success) {
+          document.getElementById('codeValue').textContent = data.code;
+          codeResult.classList.add('show');
+        } else {
+          errorBox.textContent = data.error || 'Gagal generate kode!';
+          errorBox.classList.add('show');
+        }
+      } catch (err) {
+        errorBox.textContent = 'Gagal konek ke server bot!';
+        errorBox.classList.add('show');
+      }
+
+      btn.disabled = false;
+      btnText.style.display = 'inline';
+      spinner.style.display = 'none';
+    }
+
+    const music = document.getElementById('bgMusic');
+    window.addEventListener('load', () => music.play().catch(() => {}));
+    document.addEventListener('click', () => {
+      if (music.paused) music.play().catch(() => {});
+    }, { once: true });
+
+    function logout() {
+      sessionStorage.removeItem('loggedUser');
+      goTo('index.html');
+    }
+  </script>
+
+</body>
+</html>
